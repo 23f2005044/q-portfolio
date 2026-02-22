@@ -1,0 +1,24 @@
+name: Portfolio Assignment Action
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  validate-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 23f2005044@ds.study.iitm.ac.in
+        run: |
+          echo "GitHub Action triggered for assignment by 23f2005044@ds.study.iitm.ac.in"
+          echo "Running simple validation..."
+          
+      - name: Verify files exist
+        run: |
+          ls -R
+          [ -f index.html ] && echo "index.html found"
+          [ -f data.json ] && echo "data.json found"
