@@ -12,6 +12,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Cache priming
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: |
+            sample-cache-dir
+          key: cache-2f3586a
+
+      - name: prime-cache-2f3586a
+        run: |
+          if [ "${{ steps.cache-step.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache Hit: The files were found in the cache!"
+          else
+            echo "Cache Miss: No files were found, creating them now..."
+            mkdir -p sample-cache-dir
+            echo "This is some data to be cached" > sample-cache-dir/cached-file.txt
+          fi
+
       - name: 23f2005044@ds.study.iitm.ac.in
         run: |
           echo "GitHub Action triggered for assignment by 23f2005044@ds.study.iitm.ac.in"
